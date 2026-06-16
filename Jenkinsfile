@@ -3,9 +3,16 @@ pipeline {
 
     stages {
 
+        stage('Clean Workspace') {
+            steps {
+                sh 'rm -rf .terraform'
+                sh 'rm -rf .terraform.lock.hcl'
+            }
+        }
+
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                sh 'terraform init -reconfigure'
             }
         }
 
